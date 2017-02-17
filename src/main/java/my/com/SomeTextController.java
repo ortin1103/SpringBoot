@@ -18,10 +18,15 @@ public class SomeTextController {
 
         logger.debug("Enter text: {}", text);
 
-        String lowerCaseString = text.toLowerCase();
+        return lowerString(text);
+
+
+    }
+   public String lowerString(String string){
+        String lower= string.toLowerCase();
         int count = 0;
-        for (int i = 0; i < lowerCaseString.length(); ++i) {
-            Character character = lowerCaseString.charAt(i);
+        for (int i = 0; i < lower.length(); ++i) {
+            Character character = lower.charAt(i);
             char[] vowels = {'a', 'e', 'i', 'o', 'u'};
 
             logger.trace("Vowels: {}", vowels);
@@ -41,8 +46,10 @@ public class SomeTextController {
         String result = count < 3 ? "ok" : "ne_ok";
 
         logger.trace("Return result {}", result);
+
         return result;
     }
+
 }
 
 
