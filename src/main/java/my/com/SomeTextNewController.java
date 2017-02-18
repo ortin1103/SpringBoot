@@ -15,12 +15,24 @@ public class SomeTextNewController {
 
     @RequestMapping("newtext")
     public String someText(@RequestParam("t") String text) {
-        if (controllerService.string(text)==null)
-        {
-            return "vveden pustoy zapros";
+
+
+        try {
+            return controllerService.string(text);
+
+        } catch (EmptyException ex) {
+            logger.error("Pustoy zapros", ex);
+            return "vvely pustoy zapros, resultat OK";
+
+        } catch (TwoWorldException exp) {
+            logger.error("dva slova",exp);
+            return exp.getOtvet();
+
+        } catch (Exception e) {
+            logger.debug("exception",e);
+            e.printStackTrace();
+            return "error";
+
         }
-        String result= controllerService.string(text);
-        logger.trace("ok  ne_ok: {}",result);
-        return result;
     }
 }
